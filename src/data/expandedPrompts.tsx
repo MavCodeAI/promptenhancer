@@ -184,6 +184,36 @@ export const EXPANDED_PROMPT_CATEGORIES = [
         text: "Create a framework for maintaining work-life balance in a demanding career. Include practical strategies and boundary-setting techniques.",
         tags: ["work-life balance", "wellness", "productivity", "boundaries"],
         difficulty: "beginner"
+      },
+      {
+        title: "Market Analysis",
+        text: "Conduct a basic SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for a small local coffee shop competing against larger chains.",
+        tags: ["business", "strategy", "analysis", "swot", "competition"],
+        difficulty: "beginner"
+      },
+      {
+        title: "Business Pitch Idea",
+        text: "Develop a concise elevator pitch for a new sustainable subscription box service. Highlight the unique value proposition and target market.",
+        tags: ["business", "pitch", "startup", "sustainability", "marketing"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Negotiation Strategy",
+        text: "Outline a negotiation strategy for securing a partnership between two complementary businesses. Define objectives, potential concessions, and desired outcomes.",
+        tags: ["business", "negotiation", "partnership", "strategy", "b2b"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Developer Portfolio",
+        text: "Outline the key components of an effective online portfolio for a web developer. What types of projects should be included, and how should they be presented?",
+        tags: ["career", "portfolio", "web development", "job search", "personal branding"],
+        difficulty: "beginner"
+      },
+      {
+        title: "Technical Interview Prep (DS&A)",
+        text: "Create a study plan for preparing for data structures and algorithms questions in technical interviews. Include key topics (e.g., arrays, trees, graphs, sorting) and practice strategies.",
+        tags: ["career", "interview", "technical interview", "data structures", "algorithms", "job search"],
+        difficulty: "intermediate"
       }
     ]
   }
@@ -335,6 +365,96 @@ export const ADDITIONAL_CATEGORIES = [
         text: "Predict and describe a technological advancement that could significantly impact society in the next decade.",
         tags: ["future", "technology", "prediction", "impact"],
         difficulty: "intermediate"
+      },
+      {
+        title: "Frontend Framework Choice",
+        text: "Analyze the pros and cons of using React vs. Vue vs. Svelte for building a complex, interactive single-page application (SPA) dashboard. Consider performance, learning curve, and ecosystem.",
+        tags: ["web development", "frontend", "react", "vue", "svelte", "comparison", "spa"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "API Design",
+        text: "Design a REST API structure for a simple blog application. Define the necessary endpoints (e.g., for posts, comments, users), HTTP methods, and expected request/response formats for creating and retrieving posts.",
+        tags: ["web development", "backend", "api", "rest", "design", "blog"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Web Performance Optimization",
+        text: "Outline key strategies for optimizing the loading performance of a modern e-commerce website. Include techniques like code splitting, image optimization, caching, and CDN usage.",
+        tags: ["web development", "performance", "optimization", "frontend", "caching", "cdn"],
+        difficulty: "advanced"
+      },
+      {
+        title: "CSS Layout Challenge",
+        text: "Describe how to create a responsive three-column layout using CSS Grid or Flexbox where the columns stack vertically on smaller screens.",
+        tags: ["web development", "css", "layout", "responsive", "flexbox", "grid"],
+        difficulty: "beginner"
+      },
+      {
+        title: "AI Code Generation Use Case",
+        text: "Describe a scenario where using an AI coding assistant like Cursor or GitHub Copilot would significantly speed up the development process for creating a new feature (e.g., implementing a user authentication flow).",
+        tags: ["ai", "coding", "development", "cursor", "copilot", "code generation", "productivity"],
+        difficulty: "beginner"
+      },
+      {
+        title: "AI Code Refactoring",
+        text: "Explain how you would use an AI assistant to refactor a complex, poorly written function in JavaScript to improve its readability, maintainability, and efficiency. Provide example prompts.",
+        tags: ["ai", "coding", "refactoring", "javascript", "maintainability", "efficiency", "prompt engineering"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "AI for Debugging",
+        text: "Outline a process for using an AI coding assistant to help debug a complex runtime error in a web application. What information would you provide to the AI, and what kind of assistance would you expect?",
+        tags: ["ai", "coding", "debugging", "web development", "error handling", "troubleshooting"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Limitations of AI Coders",
+        text: "Discuss the potential limitations and pitfalls of relying heavily on AI code generation tools. Consider aspects like code correctness, security vulnerabilities, and understanding the generated code.",
+        tags: ["ai", "coding", "limitations", "security", "best practices", "critical thinking"],
+        difficulty: "advanced"
+      },
+      {
+        title: "State Management Comparison (React)",
+        text: "Compare and contrast different state management solutions for React applications (e.g., Redux Toolkit, Zustand, Context API). Discuss use cases, complexity, and performance implications.",
+        tags: ["web development", "react", "state management", "redux", "zustand", "context api", "frontend"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Web Accessibility (WCAG)",
+        text: "Explain the importance of web accessibility (WCAG) and outline three key principles developers should follow to make websites usable for people with disabilities. Provide examples.",
+        tags: ["web development", "accessibility", "wcag", "frontend", "ux", "inclusive design"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Progressive Web Apps (PWA)",
+        text: "Describe the core features and benefits of Progressive Web Apps (PWAs). Explain how service workers and web app manifests contribute to PWA functionality like offline access and installability.",
+        tags: ["web development", "pwa", "service worker", "offline", "mobile", "frontend"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "SSR vs CSR",
+        text: "Explain the difference between Server-Side Rendering (SSR) and Client-Side Rendering (CSR) in web development. Discuss the trade-offs regarding performance, SEO, and user experience.",
+        tags: ["web development", "ssr", "csr", "rendering", "performance", "seo", "frontend", "backend"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "AI for Unit Testing",
+        text: "Describe how you could use an AI coding assistant to help generate unit tests for an existing function. Provide an example function and the prompts you might use.",
+        tags: ["ai", "coding", "testing", "unit testing", "development", "productivity", "prompt engineering"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "AI for Code Documentation",
+        text: "Explain how AI tools can assist in generating documentation (e.g., docstrings, comments) for code. Discuss the benefits and potential pitfalls of relying on AI for this task.",
+        tags: ["ai", "coding", "documentation", "development", "maintainability", "productivity"],
+        difficulty: "beginner"
+      },
+      {
+        title: "Comparing AI Coding Assistants",
+        text: "Briefly compare two popular AI coding assistants (e.g., GitHub Copilot vs Cursor). Discuss their potential strengths, weaknesses, and ideal use cases based on available features.",
+        tags: ["ai", "coding", "development", "cursor", "copilot", "comparison", "tools"],
+        difficulty: "beginner"
       }
     ]
   },
@@ -779,6 +899,49 @@ export const ADDITIONAL_CATEGORIES = [
         text: "Create a template for writing research reports. Include structure and best practices.",
         tags: ["research", "writing", "reports", "template"],
         difficulty: "intermediate"
+      }
+    ]
+  },
+  {
+    name: "Artificial Intelligence",
+    icon: <Brain className="h-5 w-5" />,
+    description: "Prompts related to AI concepts, ethics, and applications",
+    prompts: [
+      {
+        title: "AI Ethics Scenario",
+        text: "Analyze the ethical implications of using AI in hiring decisions. Discuss potential biases, fairness concerns, and recommendations for responsible implementation.",
+        tags: ["ai", "ethics", "hiring", "bias", "responsible ai"],
+        difficulty: "advanced"
+      },
+      {
+        title: "AI for Customer Service",
+        text: "Design an AI-powered chatbot strategy to improve customer service response times and satisfaction for an e-commerce business. Detail the chatbot's functionalities and escalation paths to human agents.",
+        tags: ["ai", "chatbot", "customer service", "ecommerce", "strategy"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Explain Machine Learning",
+        text: "Explain the basic concept of machine learning (supervised vs. unsupervised) to a non-technical audience using a simple analogy.",
+        tags: ["ai", "machine learning", "explanation", "beginner", "analogy"],
+        difficulty: "beginner"
+      },
+      {
+        title: "AI in Marketing",
+        text: "Outline how AI can be used to personalize marketing campaigns for a software product. Include examples of data usage, targeting techniques, and performance metrics.",
+        tags: ["ai", "marketing", "personalization", "data", "campaign"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Future of AI",
+        text: "Write a short speculative piece on the potential impact of Artificial General Intelligence (AGI) on society within the next 50 years. Consider both positive and negative possibilities.",
+        tags: ["ai", "agi", "future", "society", "speculative"],
+        difficulty: "advanced"
+      },
+      {
+        title: "AI Code Ownership & Licensing",
+        text: "Discuss the potential ethical and legal challenges surrounding code ownership and licensing when using AI-generated code in commercial projects.",
+        tags: ["ai", "coding", "ethics", "legal", "licensing", "ownership", "intellectual property"],
+        difficulty: "advanced"
       }
     ]
   }
