@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm run build"
+  command = "pnpm install && pnpm run build"
   publish = "dist"
 
 [[redirects]]
@@ -9,4 +9,11 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--version" 
+  NPM_FLAGS = "--version"
+  VITE_GROQ_API_URL = "https://api.groq.com/openai/v1"
+
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "production" 
