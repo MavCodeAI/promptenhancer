@@ -27,24 +27,6 @@ interface PromptCategory {
   }[];
 }
 
-const testimonials = [
-  {
-    name: "Ahmed Khan",
-    role: "Content Creator",
-    text: "This tool has revolutionized how I interact with AI. My content creation process is now 3x faster!"
-  },
-  {
-    name: "Zainab Malik",
-    role: "AI Researcher",
-    text: "The prompt enhancement quality is exceptional. It's become an essential part of my research workflow."
-  },
-  {
-    name: "Hassan Ali",
-    role: "Digital Marketer",
-    text: "I've seen a significant improvement in my AI-generated content quality since using this tool."
-  }
-];
-
 const systemPrompt = `You are an expert prompt engineer. Your task is to ENHANCE and IMPROVE the given prompt to make it more effective for AI models. DO NOT answer the prompt - instead, make it better by:
 
 1. Adding more specific details and context
@@ -237,184 +219,151 @@ const PromptImprover = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-6 sm:space-y-8">
-      <div className="text-center space-y-3 sm:space-y-4">
-        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
-          AI Prompt Enhancer
-        </h1>
-        <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
-          Transform your basic prompts into powerful, detailed instructions that get better results from AI models.
-        </p>
-      </div>
-
-      <div className="space-y-4 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-orange-100/50">
-        <Textarea
-          placeholder="Enter your prompt here..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          className="min-h-[120px] resize-none bg-gray-50/50 border-orange-100/50 focus:border-orange-200 focus:ring-orange-200 text-sm sm:text-base"
-          aria-label="Enter your prompt"
-        />
-        <div className="flex justify-end">
-          <Button
-            onClick={improvePrompt}
-            className="w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white hover:opacity-90 transition-opacity text-sm sm:text-base py-2 sm:py-3"
-            disabled={isLoading}
-            aria-label={isLoading ? "Enhancing prompt..." : "Enhance prompt"}
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                <span className="hidden sm:inline">Enhancing...</span>
-                <span className="sm:hidden">Enhancing</span>
-              </>
-            ) : (
-              <>
-                <Wand2 className="mr-2 h-4 w-4" />
-                <span className="hidden sm:inline">Enhance Prompt</span>
-                <span className="sm:hidden">Enhance</span>
-              </>
-            )}
-          </Button>
+    <div className="space-y-6 sm:space-y-8">
+      {/* Search and Filter Section */}
+      <div className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between sm:gap-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+          <Input
+            placeholder="Search prompts..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-9 h-10 sm:h-11"
+          />
+        </div>
+        <div className="flex gap-2 sm:gap-4">
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <SelectTrigger className="w-[140px] sm:w-[180px] h-10 sm:h-11">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
+              {allCategories.map((category) => (
+                <SelectItem key={category.name} value={category.name}>
+                  {category.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
+            <SelectTrigger className="w-[140px] sm:w-[180px] h-10 sm:h-11">
+              <SelectValue placeholder="Difficulty" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Difficulties</SelectItem>
+              <SelectItem value="beginner">Beginner</SelectItem>
+              <SelectItem value="intermediate">Intermediate</SelectItem>
+              <SelectItem value="advanced">Advanced</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
-      {improvedPrompt && (
-        <div className="space-y-4 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-orange-100/50">
-          <div className="flex justify-between items-center">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Enhanced Prompt</h2>
-            <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 p-2 sm:p-3"
-                onClick={copyToClipboard}
-                aria-label="Copy enhanced prompt"
-              >
-                <Copy className="h-4 w-4 sm:h-5 sm:w-5" />
-                <span className="hidden sm:inline ml-2">Copy</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-orange-600 hover:text-orange-700 hover:bg-orange-50 p-2 sm:p-3"
-                onClick={sharePrompt}
-                aria-label="Share enhanced prompt"
-              >
-                <Share2 className="h-4 w-4 sm:h-5 sm:w-5" />
-                <span className="hidden sm:inline ml-2">Share</span>
-              </Button>
-            </div>
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        {/* Left Column - Prompt Input */}
+        <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Your Prompt</label>
+            <Textarea
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              placeholder="Enter your prompt here..."
+              className="min-h-[200px] sm:min-h-[300px] resize-none"
+            />
           </div>
-          <div className="p-3 sm:p-4 bg-gray-50/50 rounded-lg sm:rounded-xl border border-orange-100/50">
-            <p className="text-sm sm:text-base text-gray-700 whitespace-pre-wrap">{improvedPrompt}</p>
-          </div>
-        </div>
-      )}
-
-      <div className="mt-8 sm:mt-12">
-        <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center space-x-3">
-              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-orange-600" />
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Expert Prompts</h2>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              <div className="relative flex-grow sm:flex-grow-0">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input
-                  type="text"
-                  placeholder="Search prompts..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full sm:w-64 pl-10 pr-4 py-2 bg-white border-orange-100/50 focus:border-orange-200 focus:ring-orange-200 text-sm"
-                  aria-label="Search prompts"
-                />
-              </div>
-              <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-                <SelectTrigger className="w-full sm:w-40">
-                  <SelectValue placeholder="Difficulty" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Levels</SelectItem>
-                  <SelectItem value="beginner">Beginner</SelectItem>
-                  <SelectItem value="intermediate">Intermediate</SelectItem>
-                  <SelectItem value="advanced">Advanced</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-orange-200 -mx-4 px-4 sm:mx-0 sm:px-0">
-            <button
-              onClick={() => setSelectedCategory("all")}
-              className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
-                selectedCategory === "all"
-                ? "bg-orange-600 text-white"
-                : "bg-white text-gray-600 hover:bg-orange-50 border border-orange-100/50"
-              }`}
-              aria-label="Show all categories"
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+            <Button
+              onClick={improvePrompt}
+              disabled={isLoading || !prompt.trim()}
+              className="flex-1 h-11"
             >
-              All Categories
-            </button>
-            {allCategories.map((category) => (
-              <button
-                key={category.name}
-                onClick={() => setSelectedCategory(category.name)}
-                className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${
-                  selectedCategory === category.name
-                  ? "bg-orange-600 text-white"
-                  : "bg-white text-gray-600 hover:bg-orange-50 border border-orange-100/50"
-                }`}
-                aria-label={`Show ${category.name} prompts`}
-              >
-                {category.icon} {category.name}
-              </button>
-            ))}
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Enhancing...
+                </>
+              ) : (
+                <>
+                  <Wand2 className="mr-2 h-4 w-4" />
+                  Enhance Prompt
+                </>
+              )}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setShowHistory(!showHistory)}
+              className="h-11"
+            >
+              <History className="mr-2 h-4 w-4" />
+              History
+            </Button>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            {filteredPrompts.map((prompt, index) => (
-              <button
-                key={index}
-                onClick={() => handlePromptClick(prompt.text)}
-                className="p-4 sm:p-5 text-left bg-white rounded-lg sm:rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-orange-100/50 hover:border-orange-200"
-                aria-label={`Use prompt: ${prompt.title}`}
-              >
-                <div className="flex items-start gap-3">
-                  <span className="text-lg sm:text-xl">{prompt.icon}</span>
-                  <div>
-                    <div className="flex justify-between items-start">
-                      <p className="text-xs text-gray-500 mb-1">{prompt.category}</p>
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        prompt.difficulty === 'beginner' ? 'bg-green-100 text-green-800' :
-                        prompt.difficulty === 'intermediate' ? 'bg-blue-100 text-blue-800' :
-                        'bg-purple-100 text-purple-800'
-                      }`}>
-                        {prompt.difficulty}
-                      </span>
-                    </div>
-                    <h3 className="font-medium text-gray-900 mb-1">{prompt.title}</h3>
-                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{prompt.text}</p>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {prompt.tags.map((tag, i) => (
-                        <span key={i} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {filteredPrompts.length === 0 && (
-            <div className="text-center py-8 sm:py-10 text-gray-500 text-sm sm:text-base">
-              No prompts found. Try adjusting your search or category filter.
-            </div>
-          )}
         </div>
+
+        {/* Right Column - Enhanced Prompt */}
+        <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Enhanced Prompt</label>
+            <div className="relative">
+              <Textarea
+                value={improvedPrompt}
+                readOnly
+                className="min-h-[200px] sm:min-h-[300px] resize-none pr-12"
+              />
+              <div className="absolute right-2 top-2 flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={copyToClipboard}
+                  className="h-8 w-8"
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={sharePrompt}
+                  className="h-8 w-8"
+                >
+                  <Share2 className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Prompt Templates Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {filteredPrompts.map((prompt, index) => (
+          <button
+            key={index}
+            onClick={() => handlePromptClick(prompt.text)}
+            className="p-4 sm:p-6 rounded-lg border bg-white hover:bg-gray-50 transition-colors text-left space-y-2 sm:space-y-3"
+          >
+            <div className="flex items-start justify-between">
+              <div className="flex items-center space-x-2">
+                {prompt.icon}
+                <h3 className="font-medium text-sm sm:text-base">{prompt.title}</h3>
+              </div>
+              <span className="text-xs px-2 py-1 rounded-full bg-orange-100 text-orange-700">
+                {prompt.difficulty}
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 line-clamp-2">{prompt.text}</p>
+            <div className="flex flex-wrap gap-1">
+              {prompt.tags.map((tag, tagIndex) => (
+                <span
+                  key={tagIndex}
+                  className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </button>
+        ))}
       </div>
     </div>
   );
