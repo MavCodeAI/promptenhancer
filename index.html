@@ -2,27 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Prompt Enhancer - Transform Your Prompts into Powerful AI Commands</title>
-    <meta name="description" content="Enhance your AI prompts with our powerful tool. Get better results from AI models by improving your prompts with expert techniques. Try our 20+ pre-made prompts or create your own." />
-    <meta name="keywords" content="AI prompt enhancer, prompt engineering, AI tools, prompt optimization, AI assistance" />
-    <meta name="author" content="AI Prompt Enhancer Team" />
-    <meta property="og:title" content="AI Prompt Enhancer - Transform Your Prompts into Powerful AI Commands" />
-    <meta property="og:description" content="Enhance your AI prompts with our powerful tool. Get better results from AI models by improving your prompts with expert techniques." />
-    <meta property="og:image" content="/og-image.png" />
-    <meta property="og:url" content="https://prompt-enhancer.com" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AI Prompt Enhancer" />
-    <meta name="twitter:description" content="Transform your prompts into powerful AI commands with our enhancement tool." />
-    <meta name="twitter:image" content="/og-image.png" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#FF6B00" />
+    <meta name="description" content="Enhance your AI prompts with advanced options and customization" />
+    <meta name="theme-color" content="#000000" />
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Prompt Enhancer" />
+    
+    <title>AI Prompt Enhancer</title>
   </head>
-
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

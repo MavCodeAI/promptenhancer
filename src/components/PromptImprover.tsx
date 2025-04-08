@@ -224,28 +224,28 @@ const PromptImprover = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-7xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-6"
+        className="space-y-6 sm:space-y-8"
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 sm:gap-6">
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
-            <div className="relative flex-1">
+            <div className="relative flex-1 w-full">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 type="text"
                 placeholder="Search prompts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
+                className="pl-9 w-full"
               />
             </div>
-            <div className="flex gap-2 w-full md:w-auto">
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-full sm:w-[180px]">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>
@@ -258,7 +258,7 @@ const PromptImprover = () => {
                 </SelectContent>
               </Select>
               <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-full sm:w-[180px]">
                   <SelectValue placeholder="All Difficulties" />
                 </SelectTrigger>
                 <SelectContent>
@@ -272,17 +272,17 @@ const PromptImprover = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <div className="space-y-3 sm:space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Your Prompt</h2>
+              <h2 className="text-base sm:text-lg font-semibold">Your Prompt</h2>
             </div>
             <div className="relative">
               <Textarea
                 placeholder="Enter your prompt here..."
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                className="min-h-[300px] resize-none"
+                className="min-h-[200px] sm:min-h-[300px] resize-none p-3 sm:p-4"
               />
               {!prompt && (
                 <motion.div
@@ -329,9 +329,9 @@ const PromptImprover = () => {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Enhanced Prompt</h2>
+              <h2 className="text-base sm:text-lg font-semibold">Enhanced Prompt</h2>
               {improvedPrompt && (
                 <div className="flex gap-2">
                   <Button
@@ -358,7 +358,7 @@ const PromptImprover = () => {
                 value={improvedPrompt}
                 readOnly
                 placeholder="Your enhanced prompt will appear here..."
-                className="min-h-[300px] resize-none"
+                className="min-h-[200px] sm:min-h-[300px] resize-none p-3 sm:p-4"
               />
               {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
@@ -390,10 +390,10 @@ const PromptImprover = () => {
           className="space-y-4"
         >
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-            <h2 className="text-xl font-semibold">Prompt Templates</h2>
+            <h2 className="text-lg sm:text-xl font-semibold">Prompt Templates</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {filteredPrompts
               .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
               .map((template, index) => (
@@ -412,10 +412,10 @@ const PromptImprover = () => {
               >
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
-                    <h3 className="font-medium group-hover:text-primary transition-colors">
+                    <h3 className="text-sm sm:text-base font-medium group-hover:text-primary transition-colors">
                       {template.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2">
+                    <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
                       {template.text}
                     </p>
                   </div>

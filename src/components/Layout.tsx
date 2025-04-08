@@ -22,13 +22,17 @@ const Layout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-muted/20">
-      <header className="border-b bg-background/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-muted/20 overflow-x-hidden">
+      <header className="border-b bg-background/80 backdrop-blur-[12px] fixed top-0 left-0 right-0 z-50 safe-top transition-colors duration-300">
         <div className="container mx-auto px-4 sm:px-6 py-2.5 sm:py-3">
           <nav className="flex items-center justify-between">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link 
+              to="/" 
+              className="flex items-center space-x-2 touch-manipulation active:scale-95 transition-transform duration-200"
+              aria-label="Home"
+            >
               <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-              <span className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              <span className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent truncate max-w-[200px]">
                 AI Prompt Enhancer
               </span>
             </Link>
@@ -74,10 +78,12 @@ const Layout = () => {
         </div>
 
         {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t bg-background/95 backdrop-blur-sm">
-            <div className="container mx-auto px-4 py-2">
-              <div className="flex flex-col space-y-1">
+        <div className={cn(
+          "md:hidden border-t bg-background/95 backdrop-blur-[12px] fixed left-0 right-0 transition-all duration-300 ease-in-out shadow-lg",
+          isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        )}>
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex flex-col space-y-3">
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
@@ -102,14 +108,13 @@ const Layout = () => {
               </div>
             </div>
           </div>
-        )}
       </header>
 
-      <main className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24">
+      <main className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 transition-all duration-300">
         <Outlet />
       </main>
 
-      <footer className="border-t bg-background/80 backdrop-blur-sm mt-4 sm:mt-8">
+      <footer className="border-t bg-background/80 backdrop-blur-[12px] mt-4 sm:mt-8 transition-colors duration-300">
         <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
