@@ -104,53 +104,36 @@ const PromptImprover = () => {
       return;
     }
 
-    // Check for API key
-    const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-    const apiUrl = import.meta.env.VITE_GROQ_API_URL;
-
-    if (!apiKey || apiKey === "your_groq_api_key_here") {
-      toast({
-        title: "API Key Missing",
-        description: "Please add your Groq API key in the .env file",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    if (!apiUrl) {
-      toast({
-        title: "API URL Missing",
-        description: "Please check your environment configuration",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsLoading(true);
     try {
-      const openai = new OpenAI({
-        apiKey,
-        baseURL: apiUrl,
-        dangerouslyAllowBrowser: true
+      const response = await fetch('/api/groq-proxy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [
+            {
+              role: "system",
+              content: systemPrompt
+            },
+            {
+              role: "user",
+              content: prompt
+            }
+          ],
+          temperature: 0.6,
+          max_tokens: 500,
+        })
       });
 
-      const completion = await openai.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          {
-            role: "system",
-            content: systemPrompt
-          },
-          {
-            role: "user",
-            content: prompt
-          }
-        ],
-        temperature: 0.6,
-        max_tokens: 500,
-      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-      let enhancedPrompt = completion.choices[0]?.message?.content?.trim() || "";
+      const data = await response.json();
+      let enhancedPrompt = data.choices[0]?.message?.content?.trim() || "";
       
       // Clean up the response
       enhancedPrompt = enhancedPrompt
@@ -177,7 +160,7 @@ const PromptImprover = () => {
         title: "Success",
         description: "Your prompt has been enhanced successfully!",
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error("API Error:", error);
       let errorMessage = "Unable to process your request. Please try again later.";
 
