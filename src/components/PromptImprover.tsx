@@ -108,7 +108,6 @@ const PromptImprover = () => {
     try {
       const apiKey = import.meta.env.VITE_GROQ_API_KEY;
       const apiUrl = import.meta.env.VITE_GROQ_API_URL;
-      const isDevelopment = import.meta.env.DEV;
 
       if (!apiKey || apiKey === "your_groq_api_key_here") {
         toast({
@@ -128,16 +127,12 @@ const PromptImprover = () => {
         return;
       }
 
-      let response;
-      if (isDevelopment) {
-        // Direct API call in development
-        const openai = new OpenAI({
-          apiKey,
-          baseURL: apiUrl,
-          dangerouslyAllowBrowser: true
-        });
-
-        response = await openai.chat.completions.create({
+      const response = await fetch('/api/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           model: "llama-3.3-70b-versatile",
           messages: [
             {
@@ -151,39 +146,15 @@ const PromptImprover = () => {
           ],
           temperature: 0.6,
           max_tokens: 500,
-        });
-      } else {
-        // Use Netlify Function proxy in production
-        response = await fetch('/api/groq-proxy', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
-            messages: [
-              {
-                role: "system",
-                content: systemPrompt
-              },
-              {
-                role: "user",
-                content: prompt
-              }
-            ],
-            temperature: 0.6,
-            max_tokens: 500,
-          })
-        });
+        })
+      });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        response = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      let enhancedPrompt = response.choices[0]?.message?.content?.trim() || "";
+      const data = await response.json();
+      let enhancedPrompt = data.choices[0]?.message?.content?.trim() || "";
       
       // Clean up the response
       enhancedPrompt = enhancedPrompt

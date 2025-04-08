@@ -67,15 +67,22 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: 'https://api.groq.com',
           changeOrigin: true,
+          secure: false,
           rewrite: (path) => path.replace(/^\/api/, ''),
           configure: (proxy, _options) => {
             proxy.on('error', (err, _req, _res) => {
               console.log('proxy error', err);
             });
             proxy.on('proxyReq', (proxyReq, req, _res) => {
+              // Add Authorization header
+              proxyReq.setHeader('Authorization', `Bearer ${env.VITE_GROQ_API_KEY}`);
               console.log('Sending Request to the Target:', req.method, req.url);
             });
             proxy.on('proxyRes', (proxyRes, req, _res) => {
+              // Add CORS headers
+              proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+              proxyRes.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+              proxyRes.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
               console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
             });
           },
