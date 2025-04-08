@@ -3,6 +3,7 @@ import { Sparkles, Wand2, Home, ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { EXPANDED_PROMPT_CATEGORIES, ADDITIONAL_CATEGORIES } from "@/data/expandedPrompts";
 
 const Layout = () => {
   const location = useLocation();
@@ -21,6 +22,9 @@ const Layout = () => {
     },
   ];
 
+  // Combine all categories
+  const allCategories = [...EXPANDED_PROMPT_CATEGORIES, ...ADDITIONAL_CATEGORIES];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-muted/20 overflow-x-hidden">
       <header className="border-b bg-background/80 backdrop-blur-[12px] fixed top-0 left-0 right-0 z-50 safe-top transition-colors duration-300">
@@ -30,6 +34,7 @@ const Layout = () => {
               to="/" 
               className="flex items-center space-x-2 touch-manipulation active:scale-95 transition-transform duration-200"
               aria-label="Home"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               <span className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent truncate max-w-[200px]">
@@ -84,30 +89,52 @@ const Layout = () => {
         )}>
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-col space-y-3">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={cn(
-                      "flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                      location.pathname === item.href
-                        ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                    )}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    <span>{item.name}</span>
-                  </Link>
-                ))}
-                <Button asChild variant="default" size="sm" className="gap-2 mt-2">
-                  <Link to="/app" onClick={() => setIsMobileMenuOpen(false)}>
-                    Try Now <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={cn(
+                    "flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                    location.pathname === item.href
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                  )}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <item.icon className="h-4 w-4" />
+                  <span>{item.name}</span>
+                </Link>
+              ))}
+              
+              {/* Prompt Categories */}
+              <div className="pt-4 border-t">
+                <h3 className="px-3 py-2 text-sm font-semibold text-muted-foreground">Prompt Categories</h3>
+                <div className="space-y-1">
+                  {allCategories.map((category) => (
+                    <Link
+                      key={category.name}
+                      to={`/app?category=${encodeURIComponent(category.name)}`}
+                      className={cn(
+                        "flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                        "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                      )}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {category.icon}
+                      <span>{category.name}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
+
+              <Button asChild variant="default" size="sm" className="gap-2 mt-2">
+                <Link to="/app" onClick={() => setIsMobileMenuOpen(false)}>
+                  Try Now <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
+        </div>
       </header>
 
       <main className="container mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 transition-all duration-300">
