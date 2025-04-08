@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { Sparkles, Wand2, Home, History, Settings, HelpCircle, ArrowRight, Menu, X } from "lucide-react";
+import { Sparkles, Wand2, Home, ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -18,16 +18,6 @@ const Layout = () => {
       name: "App",
       href: "/app",
       icon: Wand2,
-    },
-    {
-      name: "History",
-      href: "/history",
-      icon: History,
-    },
-    {
-      name: "Help",
-      href: "/help",
-      icon: HelpCircle,
     },
   ];
 
@@ -60,29 +50,26 @@ const Layout = () => {
                   <span>{item.name}</span>
                 </Link>
               ))}
-            </div>
-
-            <div className="flex items-center space-x-2">
               <Button asChild variant="default" size="sm" className="gap-2">
                 <Link to="/app">
                   Try Now <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
-
-              {/* Mobile Menu Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              >
-                {isMobileMenuOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
-              </Button>
             </div>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
           </nav>
         </div>
 
@@ -107,6 +94,11 @@ const Layout = () => {
                     <span>{item.name}</span>
                   </Link>
                 ))}
+                <Button asChild variant="default" size="sm" className="gap-2 mt-2">
+                  <Link to="/app" onClick={() => setIsMobileMenuOpen(false)}>
+                    Try Now <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
@@ -119,7 +111,7 @@ const Layout = () => {
 
       <footer className="border-t bg-background/80 backdrop-blur-sm mt-4 sm:mt-8">
         <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <Sparkles className="h-5 w-5 text-primary" />
@@ -142,48 +134,6 @@ const Layout = () => {
                     {item.name}
                   </Link>
                 ))}
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-semibold">Resources</h3>
-              <div className="space-y-2">
-                <Link
-                  to="/docs"
-                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Documentation
-                </Link>
-                <Link
-                  to="/templates"
-                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Templates
-                </Link>
-                <Link
-                  to="/blog"
-                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Blog
-                </Link>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-semibold">Contact</h3>
-              <div className="space-y-2">
-                <Link
-                  to="/support"
-                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Support
-                </Link>
-                <Link
-                  to="/feedback"
-                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Feedback
-                </Link>
               </div>
             </div>
           </div>
