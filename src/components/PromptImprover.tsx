@@ -106,28 +106,7 @@ const PromptImprover = () => {
 
     setIsLoading(true);
     try {
-      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-      const apiUrl = import.meta.env.VITE_GROQ_API_URL;
-
-      if (!apiKey || apiKey === "your_groq_api_key_here") {
-        toast({
-          title: "API Key Missing",
-          description: "Please add your Groq API key in the .env file",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      if (!apiUrl) {
-        toast({
-          title: "API URL Missing",
-          description: "Please check your environment configuration",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      const response = await fetch('/api/chat/completions', {
+      const response = await fetch('/.netlify/functions/groq-proxy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
