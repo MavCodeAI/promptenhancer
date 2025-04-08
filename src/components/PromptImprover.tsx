@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { Loader2, Copy, Wand2, Sparkles, History, Share2, Search, Filter, ArrowRight, Star } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Copy, History, Loader2, PenLine, Search, Share2, Sparkles, Wand2 } from "lucide-react";
 import OpenAI from 'openai';
 import { EXPANDED_PROMPT_CATEGORIES, ADDITIONAL_CATEGORIES } from "@/data/expandedPrompts.tsx";
 import { Input } from "@/components/ui/input";
@@ -62,6 +62,9 @@ const PromptImprover = () => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [difficultyFilter, setDifficultyFilter] = useState<string>("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hoveredPrompt, setHoveredPrompt] = useState<number | null>(null);
+  const itemsPerPage = 9;
   const { toast } = useToast();
 
   // Combine all categories
@@ -221,147 +224,42 @@ const PromptImprover = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8"
+        className="space-y-6"
       >
-        <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Prompt Enhancer</h1>
-            <p className="text-muted-foreground mt-2">
-              Transform your prompts into powerful AI instructions
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              onClick={() => setShowHistory(!showHistory)}
-              className="gap-2"
-            >
-              <History className="h-4 w-4" />
-              {showHistory ? "Hide History" : "Show History"}
-            </Button>
-            <Button
-              variant="default"
-              onClick={improvePrompt}
-              disabled={isLoading || !prompt.trim()}
-              className="gap-2"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Enhancing...
-                </>
-              ) : (
-                <>
-                  <Wand2 className="h-4 w-4" />
-                  Enhance Prompt
-                </>
-              )}
-            </Button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-4"
-          >
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Your Prompt</label>
-              <Textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Enter your prompt here..."
-                className="min-h-[200px] resize-none"
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search prompts..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-9"
               />
             </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                onClick={copyToClipboard}
-                className="gap-2"
-              >
-                <Copy className="h-4 w-4" />
-                Copy
-              </Button>
-              <Button
-                variant="outline"
-                onClick={sharePrompt}
-                className="gap-2"
-              >
-                <Share2 className="h-4 w-4" />
-                Share
-              </Button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="space-y-4"
-          >
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Enhanced Prompt</label>
-              <div className="relative">
-                <Textarea
-                  value={improvedPrompt}
-                  readOnly
-                  className="min-h-[200px] resize-none bg-muted/50"
-                />
-                {improvedPrompt && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="absolute top-2 right-2"
-                  >
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => {
-                        navigator.clipboard.writeText(improvedPrompt);
-                        toast({
-                          title: "Copied!",
-                          description: "Enhanced prompt copied to clipboard",
-                        });
-                      }}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="space-y-4"
-        >
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-            <h2 className="text-xl font-semibold">Prompt Templates</h2>
             <div className="flex gap-2 w-full md:w-auto">
-              <div className="relative flex-1 md:flex-none">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search templates..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-8"
-                />
-              </div>
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="All Categories" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Categories</SelectItem>
+                  {allCategories.map((category) => (
+                    <SelectItem key={category.name} value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Filter by difficulty" />
+                  <SelectValue placeholder="All Difficulties" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Difficulties</SelectItem>
@@ -372,9 +270,133 @@ const PromptImprover = () => {
               </Select>
             </div>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Your Prompt</h2>
+            </div>
+            <div className="relative">
+              <Textarea
+                placeholder="Enter your prompt here..."
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="min-h-[300px] resize-none"
+              />
+              {!prompt && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                  <div className="text-center text-muted-foreground">
+                    <PenLine className="h-12 w-12 mx-auto mb-4 opacity-20" />
+                    <p className="text-lg">Type a prompt to get started!</p>
+                    <p className="text-sm">Or select a template below</p>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+            <div className="flex justify-between items-center">
+              <Button
+                variant="outline"
+                onClick={() => setShowHistory(!showHistory)}
+                className="gap-2"
+              >
+                <History className="h-4 w-4" />
+                {showHistory ? "Hide History" : "Show History"}
+              </Button>
+              <Button
+                variant="default"
+                onClick={improvePrompt}
+                disabled={isLoading || !prompt.trim()}
+                className="gap-2"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Enhancing...
+                  </>
+                ) : (
+                  <>
+                    <Wand2 className="h-4 w-4" />
+                    Enhance Prompt
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">Enhanced Prompt</h2>
+              {improvedPrompt && (
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={copyToClipboard}
+                    className="h-8 w-8"
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={sharePrompt}
+                    className="h-8 w-8"
+                  >
+                    <Share2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+            </div>
+            <div className="relative">
+              <Textarea
+                value={improvedPrompt}
+                readOnly
+                placeholder="Your enhanced prompt will appear here..."
+                className="min-h-[300px] resize-none"
+              />
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+                  <Loader2 className="h-8 w-8 animate-spin" />
+                </div>
+              )}
+              {!improvedPrompt && !isLoading && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                  <div className="text-center text-muted-foreground">
+                    <Wand2 className="h-12 w-12 mx-auto mb-4 opacity-20" />
+                    <p className="text-lg">Your enhanced prompt will appear here</p>
+                    <p className="text-sm">Click enhance to transform your prompt</p>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="space-y-4"
+        >
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+            <h2 className="text-xl font-semibold">Prompt Templates</h2>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredPrompts.map((template, index) => (
+            {filteredPrompts
+              .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+              .map((template, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -385,6 +407,8 @@ const PromptImprover = () => {
                   "group"
                 )}
                 onClick={() => handlePromptClick(template.text)}
+                onMouseEnter={() => setHoveredPrompt(index)}
+                onMouseLeave={() => setHoveredPrompt(null)}
               >
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
@@ -420,6 +444,32 @@ const PromptImprover = () => {
               </motion.div>
             ))}
           </div>
+
+          {Math.ceil(filteredPrompts.length / itemsPerPage) > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-6">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="h-4 w-4 mr-2" />
+                Previous
+              </Button>
+              <span className="text-sm text-muted-foreground">
+                Page {currentPage} of {Math.ceil(filteredPrompts.length / itemsPerPage)}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredPrompts.length / itemsPerPage)))}
+                disabled={currentPage === Math.ceil(filteredPrompts.length / itemsPerPage)}
+              >
+                Next
+                <ChevronRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </div>
