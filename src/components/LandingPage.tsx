@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Zap, Shield, Clock, Copy, Wand2, Star, Check, ChevronDown, ArrowUpRight, Users, BarChart, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const features = [
   {
@@ -91,215 +93,225 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/50">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16 sm:py-20 md:py-24">
-        <div className={`text-center space-y-6 max-w-3xl mx-auto transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="inline-block">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center space-y-6 max-w-3xl mx-auto"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-block"
+          >
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary">
               <Sparkles className="h-4 w-4 mr-1" /> AI-Powered Prompt Engineering
             </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent leading-tight">
-            Transform Your Prompts into Powerful AI Commands
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            Enhance your AI interactions with our powerful prompt engineering tool. Get better results from AI models by improving your prompts with expert techniques.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Link to="/app">
-              <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all">
-                Try Now <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Button size="lg" variant="outline" className="border-orange-200 hover:bg-orange-50 px-8 py-6 text-lg">
-              Learn More
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
+          >
+            Transform Your AI Prompts into{" "}
+            <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              Powerful Commands
+            </span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="text-xl text-muted-foreground"
+          >
+            Enhance your prompts with AI-powered engineering to get better results from any AI model.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Button asChild size="lg" className="gap-2">
+              <Link to="/app">
+                Get Started <ArrowRight className="h-4 w-4" />
+              </Link>
             </Button>
-          </div>
-          <div className="pt-8 flex justify-center">
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <Check className="h-4 w-4 text-green-500" />
-              <span>No credit card required</span>
-              <span className="mx-2">•</span>
-              <Check className="h-4 w-4 text-green-500" />
-              <span>Free to get started</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Stats Section */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          {stats.map((stat, index) => (
-            <div key={index} className="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-orange-100 text-center">
-              <div className="text-orange-600 mb-2 flex justify-center">{stat.icon}</div>
-              <div className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+            <Button variant="outline" size="lg" className="gap-2">
+              Learn More <ChevronDown className="h-4 w-4" />
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Features Section */}
-      <div className="container mx-auto px-4 py-16 sm:py-20">
-        <div className="text-center mb-12">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 mb-4">
-            <Sparkles className="h-4 w-4 mr-1" /> Features
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Powerful Features</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Everything you need to create effective prompts for AI models
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      <div className="container mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {features.map((feature, index) => (
-            <div 
-              key={index} 
-              className={`${feature.bgColor} p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-gray-200 hover:-translate-y-1 group`}
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={cn(
+                "p-6 rounded-xl border bg-card",
+                "hover:shadow-lg transition-all duration-300",
+                "group"
+              )}
             >
-              <div className={`${feature.iconBg} w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform duration-300`}>
+              <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", feature.iconBg)}>
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p className="text-gray-600 mb-4">{feature.description}</p>
-              <div className="flex items-center text-sm font-medium text-gray-700">
-                <span>Learn more</span>
-                <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </div>
-            </div>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                {feature.title}
+              </h3>
+              <p className="text-muted-foreground">{feature.description}</p>
+            </motion.div>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center justify-center space-x-2 text-sm text-gray-500 bg-gray-50 px-4 py-2 rounded-full">
-            <Check className="h-4 w-4 text-green-500" />
-            <span>All features included in the free plan</span>
-          </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* How It Works Section */}
-      <div className="container mx-auto px-4 py-16 sm:py-20 bg-white rounded-2xl shadow-sm my-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">How It Works</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Get better AI results in three simple steps
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-orange-600">1</span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Enter Your Prompt</h3>
-            <p className="text-gray-600">Type or paste your basic prompt into our tool</p>
-          </div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-orange-600">2</span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Enhance</h3>
-            <p className="text-gray-600">Our AI improves your prompt with expert techniques</p>
-          </div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl font-bold text-orange-600">3</span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Use & Share</h3>
-            <p className="text-gray-600">Copy your enhanced prompt and get better AI results</p>
-          </div>
-        </div>
+      {/* Stats Section */}
+      <div className="container mx-auto px-4 py-16 bg-muted/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="text-3xl font-bold mb-2">{stat.value}</div>
+              <div className="flex items-center justify-center gap-2 text-muted-foreground">
+                {stat.icon}
+                <span>{stat.label}</span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Testimonials Section */}
-      <div className="container mx-auto px-4 py-16 sm:py-20">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">What Our Users Say</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied users who have transformed their AI interactions
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+      <div className="container mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-orange-100 hover:shadow-md transition-all duration-300">
-              <div className="mb-4">
-                <h4 className="font-semibold text-lg">{testimonial.name}</h4>
-                <p className="text-sm text-gray-600">{testimonial.role}</p>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="p-6 rounded-xl border bg-card"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="text-xl font-bold text-primary">
+                    {testimonial.name.charAt(0)}
+                  </span>
+                </div>
+                <div>
+                  <h4 className="font-semibold">{testimonial.name}</h4>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                </div>
               </div>
-              <p className="text-gray-600 mb-4">{testimonial.text}</p>
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                ))}
-              </div>
-            </div>
+              <p className="text-muted-foreground">{testimonial.text}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* FAQ Section */}
-      <div className="container mx-auto px-4 py-16 sm:py-20">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Find answers to common questions about our service
-          </p>
-        </div>
-        <div className="max-w-3xl mx-auto space-y-4">
+      <div className="container mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto space-y-4"
+        >
+          <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
           {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className="bg-white p-6 rounded-xl shadow-sm border border-orange-100 hover:border-orange-200 transition-all duration-300"
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="border rounded-lg overflow-hidden"
             >
               <button
-                className="w-full flex justify-between items-center"
+                className="w-full p-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors"
                 onClick={() => setActiveFaq(activeFaq === index ? null : index)}
               >
-                <h3 className="text-lg font-semibold text-left">{faq.question}</h3>
-                <ChevronDown className={`h-5 w-5 transform transition-transform ${activeFaq === index ? 'rotate-180' : ''}`} />
+                <span className="font-medium">{faq.question}</span>
+                <ChevronDown
+                  className={cn(
+                    "h-5 w-5 transition-transform",
+                    activeFaq === index && "rotate-180"
+                  )}
+                />
               </button>
               {activeFaq === index && (
-                <p className="mt-4 text-gray-600">{faq.answer}</p>
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="p-4 bg-muted/30"
+                >
+                  <p className="text-muted-foreground">{faq.answer}</p>
+                </motion.div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* CTA Section */}
-      <div className="container mx-auto px-4 py-16 sm:py-20">
-        <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-8 sm:p-12 text-center text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-          <div className="relative z-10">
-            <h2 className="text-3xl font-bold mb-4">Ready to Enhance Your Prompts?</h2>
-            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Start getting better results from AI models today
-            </p>
+      <div className="container mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center space-y-6 max-w-3xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold">Ready to Enhance Your Prompts?</h2>
+          <p className="text-xl text-muted-foreground">
+            Join thousands of users who are getting better results from AI models.
+          </p>
+          <Button asChild size="lg" className="gap-2">
             <Link to="/app">
-              <Button size="lg" className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all">
-                Get Started Now <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              Get Started Now <ArrowRight className="h-4 w-4" />
             </Link>
-            <p className="mt-4 text-sm opacity-80">No credit card required • Free to get started</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="container mx-auto px-4 py-8 border-t border-gray-200">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-2 mb-4 md:mb-0">
-            <Sparkles className="h-5 w-5 text-orange-600" />
-            <span className="font-bold text-gray-900">AI Prompt Enhancer</span>
-          </div>
-          <div className="flex space-x-4">
-            <a href="#" className="text-gray-600 hover:text-orange-600 transition-colors">Terms</a>
-            <a href="#" className="text-gray-600 hover:text-orange-600 transition-colors">Privacy</a>
-            <a href="#" className="text-gray-600 hover:text-orange-600 transition-colors">Contact</a>
-          </div>
-        </div>
+          </Button>
+        </motion.div>
       </div>
     </div>
   );
