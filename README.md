@@ -2,17 +2,17 @@
 
 A powerful tool to enhance your AI prompts using advanced prompt engineering techniques and Groq's Llama 4 model. Transform your basic prompts into detailed, effective commands that get better results from AI models.
 
-## Features
+## 🚀 Features
 
-- 🚀 Instant prompt enhancement using Llama 4
-- 📚 30+ expert pre-made prompts
-- 💾 Prompt history tracking
-- 📋 Copy and share enhanced prompts
-- 🌙 Dark mode support
-- 📱 Responsive design
-- ⚡ Ultra-fast processing with Groq
+- **Instant Prompt Enhancement**: Get better AI responses with optimized prompts
+- **Expert Pre-made Prompts**: Access 30+ professionally crafted prompt templates
+- **Prompt History**: Track and revisit your enhanced prompts
+- **Easy Sharing**: Copy and share enhanced prompts with one click
+- **Dark Mode**: Work comfortably in any lighting condition
+- **Responsive Design**: Use on any device - desktop, tablet, or mobile
+- **Ultra-Fast Processing**: Powered by Groq's lightning-fast inference
 
-## Getting Started
+## 🛠️ Getting Started
 
 ### Prerequisites
 
@@ -23,8 +23,8 @@ A powerful tool to enhance your AI prompts using advanced prompt engineering tec
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/prompt-enhancer.git
-cd prompt-enhancer
+git clone https://github.com/MavCodeAI/prompten.git
+cd prompten
 ```
 
 2. Install dependencies:
@@ -48,58 +48,69 @@ pnpm dev
 
 5. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-## Usage
+## 📝 Usage Guide
 
-1. Enter your prompt in the input field
-2. Click "Enhance Prompt" to get an improved version
-3. Copy or share the enhanced prompt
-4. Try the expert prompts for inspiration
+1. **Enter Your Prompt**: Type your initial prompt in the input field
+2. **Enhance**: Click "Enhance Prompt" to get an improved version
+3. **Copy/Share**: Use the copy button to save or share your enhanced prompt
+4. **Explore Templates**: Browse expert prompts for inspiration
 
-## Features in Detail
+## 🔍 Expert Prompt Categories
 
-### Expert Prompts Categories
-- Executive & Strategy
-- Product & Tech
-- Marketing & Growth
-- Sales & Business Development
-- Operations & Management
-- Team & Leadership
-- Innovation & Research
-- Client & Stakeholder
+- **Executive & Strategy**: Business planning and decision-making
+- **Product & Tech**: Development and technical documentation
+- **Marketing & Growth**: Campaigns and audience engagement
+- **Sales & Business**: Deal closing and customer relations
+- **Operations**: Process optimization and management
+- **Team Leadership**: Team building and management
+- **Innovation**: Research and development
+- **Stakeholder**: Client and partner communications
 
-### Technical Stack
-- React + TypeScript
-- Vite for fast development
-- Tailwind CSS for styling
-- Groq API for prompt enhancement
-- React Router for navigation
-- Dark mode support
+## 💻 Technical Stack
 
-## Security
+- **Frontend**: React + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **AI Integration**: Groq API
+- **Routing**: React Router
+- **UI Components**: shadcn/ui
+- **State Management**: React Context
 
-- API keys are stored in .env file
-- No sensitive data is logged or exposed
-- Secure error handling
-- Environment variables protection
+## 🔒 Security Features
 
-## Contributing
+- Secure API key storage in .env
+- Protected environment variables
+- No sensitive data logging
+- Safe error handling
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 🤝 Contributing
 
-## License
+We welcome contributions! Please feel free to:
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 📄 License
 
-## Acknowledgments
+MIT License - See [LICENSE](LICENSE) for details.
 
-- Built with React and TypeScript
-- Styled with Tailwind CSS
-- Powered by Groq's Llama 4 model
-- UI components from shadcn/ui
+## 🙏 Acknowledgments
 
-## Support
+- React and TypeScript community
+- Tailwind CSS team
+- Groq for their powerful AI models
+- shadcn/ui for beautiful components
 
-If you encounter any issues:
-1. Check the troubleshooting section above
-2. Open an issue in the repository
-3. Join our Discord community for help
+## 💬 Support
+
+Need help? Here's how to get support:
+1. Check the troubleshooting guide
+2. Open a GitHub issue
+3. Join our Discord community
+4. Contact us at support@mavcode.ai
+
+## 📞 Contact
+
+- **Email**: support@mavcode.ai
+- **Website**: [mavcode.ai](https://mavcode.ai)
+- **Twitter**: [@MavCodeAI](https://twitter.com/MavCodeAI)
