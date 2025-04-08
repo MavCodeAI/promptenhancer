@@ -106,12 +106,38 @@ const PromptImprover = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('/api/groq-proxy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+      const apiUrl = import.meta.env.VITE_GROQ_API_URL;
+      const isDevelopment = import.meta.env.DEV;
+
+      if (!apiKey || apiKey === "your_groq_api_key_here") {
+        toast({
+          title: "API Key Missing",
+          description: "Please add your Groq API key in the .env file",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (!apiUrl) {
+        toast({
+          title: "API URL Missing",
+          description: "Please check your environment configuration",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      let response;
+      if (isDevelopment) {
+        // Direct API call in development
+        const openai = new OpenAI({
+          apiKey,
+          baseURL: apiUrl,
+          dangerouslyAllowBrowser: true
+        });
+
+        response = await openai.chat.completions.create({
           model: "llama-3.3-70b-versatile",
           messages: [
             {
@@ -125,15 +151,39 @@ const PromptImprover = () => {
           ],
           temperature: 0.6,
           max_tokens: 500,
-        })
-      });
+        });
+      } else {
+        // Use Netlify Function proxy in production
+        response = await fetch('/api/groq-proxy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: "llama-3.3-70b-versatile",
+            messages: [
+              {
+                role: "system",
+                content: systemPrompt
+              },
+              {
+                role: "user",
+                content: prompt
+              }
+            ],
+            temperature: 0.6,
+            max_tokens: 500,
+          })
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        response = await response.json();
       }
 
-      const data = await response.json();
-      let enhancedPrompt = data.choices[0]?.message?.content?.trim() || "";
+      let enhancedPrompt = response.choices[0]?.message?.content?.trim() || "";
       
       // Clean up the response
       enhancedPrompt = enhancedPrompt
