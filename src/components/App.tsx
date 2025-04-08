@@ -1,15 +1,37 @@
 import { useState } from "react";
-import { Wand2, Copy, ArrowLeft, Share2, Sparkles, Loader2 } from "lucide-react";
+import { Wand2, Copy, ArrowLeft, Share2, Loader2, ChevronDown, ChevronUp, Settings2, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+
+interface AdvancedOptions {
+  tone: string;
+  style: string;
+  creativity: number;
+  persona: string;
+}
 
 const App = () => {
   const [prompt, setPrompt] = useState("");
   const [enhancedPrompt, setEnhancedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [advancedOptions, setAdvancedOptions] = useState<AdvancedOptions>({
+    tone: "professional",
+    style: "concise",
+    creativity: 0.5,
+    persona: "expert",
+  });
   const { toast } = useToast();
 
   const handleEnhance = async () => {
@@ -24,10 +46,15 @@ const App = () => {
 
     setIsLoading(true);
     try {
-      // Simulate API call
+      // Simulate API call with advanced options
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setEnhancedPrompt(
-        `Enhanced version of: ${prompt}\n\nAdditional context and improvements...`
+        `Enhanced version of: ${prompt}\n\n` +
+        `Tone: ${advancedOptions.tone}\n` +
+        `Style: ${advancedOptions.style}\n` +
+        `Creativity: ${advancedOptions.creativity}\n` +
+        `Persona: ${advancedOptions.persona}\n\n` +
+        `Additional context and improvements...`
       );
     } catch (error) {
       toast({
@@ -117,6 +144,120 @@ const App = () => {
                   className="min-h-[150px] sm:min-h-[200px] resize-none bg-background/50 backdrop-blur-sm border-muted-foreground/20 focus:border-primary/50 transition-all duration-300 shadow-sm"
                 />
               </div>
+
+              {/* Advanced Options Toggle */}
+              <motion.div
+                className="space-y-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Button
+                  variant="ghost"
+                  className="w-full sm:w-auto gap-2 text-muted-foreground hover:text-foreground"
+                  onClick={() => setShowAdvanced(!showAdvanced)}
+                >
+                  <Settings2 className="h-4 w-4" />
+                  Advanced Options
+                  {showAdvanced ? (
+                    <ChevronUp className="h-4 w-4" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4" />
+                  )}
+                </Button>
+
+                <AnimatePresence>
+                  {showAdvanced && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-4 p-4 rounded-lg bg-background/50 backdrop-blur-sm border border-muted-foreground/20"
+                    >
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">Tone</label>
+                          <Select
+                            value={advancedOptions.tone}
+                            onValueChange={(value) =>
+                              setAdvancedOptions({ ...advancedOptions, tone: value })
+                            }
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select tone" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="professional">Professional</SelectItem>
+                              <SelectItem value="casual">Casual</SelectItem>
+                              <SelectItem value="friendly">Friendly</SelectItem>
+                              <SelectItem value="formal">Formal</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">Style</label>
+                          <Select
+                            value={advancedOptions.style}
+                            onValueChange={(value) =>
+                              setAdvancedOptions({ ...advancedOptions, style: value })
+                            }
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select style" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="concise">Concise</SelectItem>
+                              <SelectItem value="detailed">Detailed</SelectItem>
+                              <SelectItem value="creative">Creative</SelectItem>
+                              <SelectItem value="technical">Technical</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">
+                            Creativity Level
+                          </label>
+                          <Slider
+                            value={[advancedOptions.creativity * 100]}
+                            onValueChange={([value]) =>
+                              setAdvancedOptions({
+                                ...advancedOptions,
+                                creativity: value / 100,
+                              })
+                            }
+                            max={100}
+                            step={1}
+                            className="w-full"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">Persona</label>
+                          <Select
+                            value={advancedOptions.persona}
+                            onValueChange={(value) =>
+                              setAdvancedOptions({ ...advancedOptions, persona: value })
+                            }
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select persona" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="expert">Expert</SelectItem>
+                              <SelectItem value="teacher">Teacher</SelectItem>
+                              <SelectItem value="assistant">Assistant</SelectItem>
+                              <SelectItem value="analyst">Analyst</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
