@@ -36,6 +36,14 @@ import {
   PenLineIcon,
   MessageCircleIcon,
   BookMarkedIcon,
+  BarChart,
+  Link,
+  Atom,
+  Server,
+  Shield,
+  Cpu,
+  Building2,
+  PenSquare,
 } from "lucide-react";
 
 export const EXPANDED_PROMPT_CATEGORIES = [
@@ -942,6 +950,529 @@ export const ADDITIONAL_CATEGORIES = [
         text: "Discuss the potential ethical and legal challenges surrounding code ownership and licensing when using AI-generated code in commercial projects.",
         tags: ["ai", "coding", "ethics", "legal", "licensing", "ownership", "intellectual property"],
         difficulty: "advanced"
+      }
+    ]
+  },
+  {
+    name: "Web Development & AI",
+    icon: <Code className="h-5 w-5" />,
+    description: "Prompts for web development and AI integration",
+    prompts: [
+      {
+        title: "Frontend Framework Choice",
+        text: "Analyze the pros and cons of using React vs. Vue vs. Svelte for building a complex, interactive single-page application (SPA) dashboard. Consider performance, learning curve, and ecosystem.",
+        tags: ["web development", "frontend", "react", "vue", "svelte", "comparison", "spa"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "API Design",
+        text: "Design a REST API structure for a simple blog application. Define the necessary endpoints (e.g., for posts, comments, users), HTTP methods, and expected request/response formats for creating and retrieving posts.",
+        tags: ["web development", "backend", "api", "rest", "design", "blog"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Web Performance Optimization",
+        text: "Outline key strategies for optimizing the loading performance of a modern e-commerce website. Include techniques like code splitting, image optimization, caching, and CDN usage.",
+        tags: ["web development", "performance", "optimization", "frontend", "caching", "cdn"],
+        difficulty: "advanced"
+      },
+      {
+        title: "CSS Layout Challenge",
+        text: "Describe how to create a responsive three-column layout using CSS Grid or Flexbox where the columns stack vertically on smaller screens.",
+        tags: ["web development", "css", "layout", "responsive", "flexbox", "grid"],
+        difficulty: "beginner"
+      },
+      {
+        title: "AI Code Generation Use Case",
+        text: "Describe a scenario where using an AI coding assistant like Cursor or GitHub Copilot would significantly speed up the development process for creating a new feature (e.g., implementing a user authentication flow).",
+        tags: ["ai", "coding", "development", "cursor", "copilot", "code generation", "productivity"],
+        difficulty: "beginner"
+      },
+      {
+        title: "AI Code Refactoring",
+        text: "Explain how you would use an AI assistant to refactor a complex, poorly written function in JavaScript to improve its readability, maintainability, and efficiency. Provide example prompts.",
+        tags: ["ai", "coding", "refactoring", "javascript", "maintainability", "efficiency", "prompt engineering"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "AI for Debugging",
+        text: "Outline a process for using an AI coding assistant to help debug a complex runtime error in a web application. What information would you provide to the AI, and what kind of assistance would you expect?",
+        tags: ["ai", "coding", "debugging", "web development", "error handling", "troubleshooting"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Limitations of AI Coders",
+        text: "Discuss the potential limitations and pitfalls of relying heavily on AI code generation tools. Consider aspects like code correctness, security vulnerabilities, and understanding the generated code.",
+        tags: ["ai", "coding", "limitations", "security", "best practices", "critical thinking"],
+        difficulty: "advanced"
+      },
+      {
+        title: "State Management Comparison (React)",
+        text: "Compare and contrast different state management solutions for React applications (e.g., Redux Toolkit, Zustand, Context API). Discuss use cases, complexity, and performance implications.",
+        tags: ["web development", "react", "state management", "redux", "zustand", "context api", "frontend"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Comparing AI Coding Assistants",
+        text: "Briefly compare two popular AI coding assistants (e.g., GitHub Copilot vs Cursor). Discuss their potential strengths, weaknesses, and ideal use cases based on available features.",
+        tags: ["ai", "coding", "development", "cursor", "copilot", "comparison", "tools"],
+        difficulty: "beginner"
+      }
+    ]
+  },
+  {
+    name: "AI & Machine Learning",
+    icon: <Brain className="h-5 w-5" />,
+    description: "Advanced prompts for AI and machine learning applications",
+    prompts: [
+      {
+        title: "AI Model Training",
+        text: "Design a training pipeline for a machine learning model that predicts customer churn. Include data preprocessing, feature engineering, model selection, and evaluation metrics.",
+        tags: ["ai", "ml", "training", "pipeline", "churn prediction"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Natural Language Processing",
+        text: "Create a plan for implementing a sentiment analysis system for customer reviews. Include data collection, model architecture, and deployment strategy.",
+        tags: ["ai", "nlp", "sentiment analysis", "text processing"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Computer Vision Project",
+        text: "Outline a computer vision project for object detection in retail environments. Include dataset requirements, model architecture, and real-world deployment considerations.",
+        tags: ["ai", "computer vision", "object detection", "retail"],
+        difficulty: "advanced"
+      },
+      {
+        title: "AI Ethics Framework",
+        text: "Develop an ethical framework for deploying AI systems in healthcare. Include considerations for bias, privacy, and patient safety.",
+        tags: ["ai", "ethics", "healthcare", "bias", "privacy"],
+        difficulty: "advanced"
+      },
+      {
+        title: "ML Model Deployment",
+        text: "Create a deployment strategy for a machine learning model in a production environment. Include monitoring, versioning, and rollback procedures.",
+        tags: ["ai", "ml", "deployment", "production", "monitoring"],
+        difficulty: "intermediate"
+      }
+    ]
+  },
+  {
+    name: "Data Science & Analytics",
+    icon: <BarChart className="h-5 w-5" />,
+    description: "Prompts for data analysis and visualization",
+    prompts: [
+      {
+        title: "Data Analysis Pipeline",
+        text: "Design a data analysis pipeline for processing and analyzing large-scale customer transaction data. Include data cleaning, transformation, and visualization steps.",
+        tags: ["data science", "analysis", "pipeline", "visualization"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Business Intelligence",
+        text: "Create a business intelligence dashboard for tracking key performance indicators (KPIs) in an e-commerce business. Include data sources, metrics, and visualization types.",
+        tags: ["data", "business intelligence", "dashboard", "kpis"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Data Visualization",
+        text: "Design an interactive data visualization for exploring sales trends across different regions and product categories. Include user interaction features and data filtering options.",
+        tags: ["data", "visualization", "interactive", "sales"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Predictive Analytics",
+        text: "Develop a predictive analytics model for forecasting sales in a retail business. Include feature selection, model training, and validation methods.",
+        tags: ["data", "predictive analytics", "forecasting", "sales"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Data Storytelling",
+        text: "Create a data storytelling framework for presenting insights from a complex dataset. Include narrative structure, visualization choices, and key messages.",
+        tags: ["data", "storytelling", "visualization", "insights"],
+        difficulty: "intermediate"
+      }
+    ]
+  }
+];
+
+export const EMERGING_TECH_CATEGORIES = [
+  {
+    name: "Blockchain & Web3",
+    icon: <Link className="h-5 w-5" />,
+    description: "Prompts for blockchain technology and decentralized applications",
+    prompts: [
+      {
+        title: "Smart Contract Design",
+        text: "Design a smart contract for a decentralized voting system. Include security considerations, gas optimization, and user interaction patterns.",
+        tags: ["blockchain", "smart contract", "voting", "security", "gas optimization"],
+        difficulty: "advanced"
+      },
+      {
+        title: "NFT Marketplace",
+        text: "Create a technical specification for an NFT marketplace. Include token standards, royalty mechanisms, and marketplace features.",
+        tags: ["blockchain", "nft", "marketplace", "token", "royalties"],
+        difficulty: "advanced"
+      },
+      {
+        title: "DeFi Protocol",
+        text: "Outline the architecture of a decentralized lending protocol. Include interest rate models, liquidation mechanisms, and risk management.",
+        tags: ["blockchain", "defi", "lending", "protocol", "risk"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Web3 Authentication",
+        text: "Design a secure authentication system for a Web3 application. Include wallet integration, session management, and security best practices.",
+        tags: ["blockchain", "web3", "authentication", "security", "wallet"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Blockchain Scaling",
+        text: "Compare different blockchain scaling solutions (Layer 2, sharding, etc.). Include trade-offs, implementation complexity, and use case suitability.",
+        tags: ["blockchain", "scaling", "layer2", "sharding", "performance"],
+        difficulty: "advanced"
+      }
+    ]
+  },
+  {
+    name: "Quantum Computing",
+    icon: <Atom className="h-5 w-5" />,
+    description: "Prompts for quantum computing concepts and applications",
+    prompts: [
+      {
+        title: "Quantum Algorithm",
+        text: "Explain the concept of Grover's algorithm and its potential applications in database search. Include quantum circuit representation and complexity analysis.",
+        tags: ["quantum", "algorithm", "search", "complexity", "circuit"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Quantum Cryptography",
+        text: "Design a quantum key distribution protocol. Include security guarantees, implementation challenges, and practical considerations.",
+        tags: ["quantum", "cryptography", "security", "protocol", "key distribution"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Quantum Machine Learning",
+        text: "Outline a quantum machine learning approach for pattern recognition. Include quantum feature mapping and hybrid classical-quantum architectures.",
+        tags: ["quantum", "machine learning", "pattern recognition", "hybrid", "architecture"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Quantum Error Correction",
+        text: "Explain the principles of quantum error correction codes. Include code construction, error detection, and correction procedures.",
+        tags: ["quantum", "error correction", "codes", "detection", "correction"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Quantum Simulation",
+        text: "Design a quantum simulation for molecular structure analysis. Include Hamiltonian construction and measurement strategies.",
+        tags: ["quantum", "simulation", "molecular", "hamiltonian", "measurement"],
+        difficulty: "advanced"
+      }
+    ]
+  },
+  {
+    name: "Edge Computing & IoT",
+    icon: <Server className="h-5 w-5" />,
+    description: "Prompts for edge computing and Internet of Things applications",
+    prompts: [
+      {
+        title: "Edge AI Deployment",
+        text: "Design an edge AI system for real-time object detection. Include model optimization, hardware selection, and deployment considerations.",
+        tags: ["edge", "ai", "deployment", "optimization", "hardware"],
+        difficulty: "advanced"
+      },
+      {
+        title: "IoT Security",
+        text: "Create a security framework for an IoT network. Include device authentication, data encryption, and network segmentation.",
+        tags: ["iot", "security", "authentication", "encryption", "network"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Edge Analytics",
+        text: "Design a real-time analytics pipeline for edge devices. Include data processing, storage, and communication strategies.",
+        tags: ["edge", "analytics", "real-time", "processing", "storage"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "IoT Protocol Selection",
+        text: "Compare different IoT communication protocols (MQTT, CoAP, etc.). Include use cases, power consumption, and scalability considerations.",
+        tags: ["iot", "protocol", "communication", "mqtt", "coap"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Edge Computing Architecture",
+        text: "Design a distributed edge computing architecture. Include resource allocation, task scheduling, and fault tolerance mechanisms.",
+        tags: ["edge", "architecture", "distributed", "scheduling", "fault tolerance"],
+        difficulty: "advanced"
+      }
+    ]
+  },
+  {
+    name: "Cybersecurity & Privacy",
+    icon: <Shield className="h-5 w-5" />,
+    description: "Prompts for cybersecurity and privacy protection",
+    prompts: [
+      {
+        title: "Zero Trust Architecture",
+        text: "Design a zero trust security model for a cloud-native application. Include identity verification, access control, and continuous monitoring.",
+        tags: ["security", "zero trust", "cloud", "identity", "monitoring"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Threat Modeling",
+        text: "Create a threat model for a web application. Include attack vectors, risk assessment, and mitigation strategies.",
+        tags: ["security", "threat modeling", "risk", "mitigation", "web"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Privacy by Design",
+        text: "Implement privacy by design principles in a data processing system. Include data minimization, purpose limitation, and user consent.",
+        tags: ["privacy", "design", "data", "consent", "compliance"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Security Incident Response",
+        text: "Develop an incident response plan for a data breach. Include detection, containment, eradication, and recovery procedures.",
+        tags: ["security", "incident", "response", "breach", "recovery"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Secure Development Lifecycle",
+        text: "Create a secure development lifecycle framework. Include security requirements, code review, testing, and deployment practices.",
+        tags: ["security", "development", "lifecycle", "testing", "deployment"],
+        difficulty: "advanced"
+      }
+    ]
+  }
+];
+
+export const TECHNICAL_CATEGORIES = [
+  {
+    name: "System Design & Architecture",
+    icon: <Cpu className="h-5 w-5" />,
+    description: "Prompts for system design and software architecture",
+    prompts: [
+      {
+        title: "Microservices Architecture",
+        text: "Design a microservices architecture for an e-commerce platform. Include service boundaries, communication patterns, and data consistency strategies.",
+        tags: ["architecture", "microservices", "e-commerce", "scalability", "design"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Distributed Systems",
+        text: "Outline a distributed system design for a real-time collaboration tool. Include consensus mechanisms, fault tolerance, and data synchronization.",
+        tags: ["distributed", "systems", "real-time", "collaboration", "consensus"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Cloud Architecture",
+        text: "Design a multi-cloud architecture for a global application. Include deployment strategies, data replication, and disaster recovery.",
+        tags: ["cloud", "architecture", "multi-cloud", "deployment", "recovery"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Event-Driven Architecture",
+        text: "Create an event-driven architecture for a financial trading platform. Include event sourcing, CQRS, and message broker selection.",
+        tags: ["event-driven", "architecture", "trading", "CQRS", "eventsourcing"],
+        difficulty: "advanced"
+      },
+      {
+        title: "API Gateway Design",
+        text: "Design an API gateway for a service-oriented architecture. Include routing, rate limiting, authentication, and monitoring.",
+        tags: ["api", "gateway", "architecture", "security", "monitoring"],
+        difficulty: "intermediate"
+      }
+    ]
+  },
+  {
+    name: "DevOps & Infrastructure",
+    icon: <Server className="h-5 w-5" />,
+    description: "Prompts for DevOps practices and infrastructure management",
+    prompts: [
+      {
+        title: "CI/CD Pipeline",
+        text: "Design a comprehensive CI/CD pipeline for a microservices application. Include testing strategies, deployment stages, and rollback procedures.",
+        tags: ["devops", "ci/cd", "pipeline", "deployment", "testing"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Infrastructure as Code",
+        text: "Create an infrastructure as code solution for a cloud-native application. Include provisioning, configuration management, and security best practices.",
+        tags: ["devops", "iac", "cloud", "provisioning", "security"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Container Orchestration",
+        text: "Design a container orchestration strategy for a high-availability application. Include scaling, service discovery, and health monitoring.",
+        tags: ["devops", "containers", "orchestration", "scaling", "monitoring"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Monitoring & Observability",
+        text: "Create a comprehensive monitoring and observability strategy. Include metrics, logging, tracing, and alerting mechanisms.",
+        tags: ["devops", "monitoring", "observability", "metrics", "logging"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Disaster Recovery",
+        text: "Design a disaster recovery plan for a critical business application. Include backup strategies, recovery procedures, and testing methodologies.",
+        tags: ["devops", "disaster recovery", "backup", "recovery", "testing"],
+        difficulty: "advanced"
+      }
+    ]
+  }
+];
+
+export const BUSINESS_STRATEGY_CATEGORIES = [
+  {
+    name: "Business Strategy",
+    icon: <Building2 className="h-5 w-5" />,
+    description: "Prompts for business strategy and planning",
+    prompts: [
+      {
+        title: "Market Entry Strategy",
+        text: "Develop a market entry strategy for a new technology product. Include market analysis, competitive positioning, and go-to-market plan.",
+        tags: ["business", "strategy", "market entry", "positioning", "planning"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Business Model Innovation",
+        text: "Create an innovative business model for a digital platform. Include revenue streams, value proposition, and customer segments.",
+        tags: ["business", "innovation", "model", "revenue", "value"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Growth Strategy",
+        text: "Design a growth strategy for a SaaS company. Include customer acquisition, retention, and expansion tactics.",
+        tags: ["business", "growth", "strategy", "saas", "acquisition"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Competitive Analysis",
+        text: "Conduct a comprehensive competitive analysis for a tech startup. Include market positioning, strengths, weaknesses, and opportunities.",
+        tags: ["business", "analysis", "competition", "strategy", "positioning"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Strategic Planning",
+        text: "Create a strategic plan for a digital transformation initiative. Include objectives, key results, and implementation roadmap.",
+        tags: ["business", "strategy", "planning", "transformation", "roadmap"],
+        difficulty: "advanced"
+      }
+    ]
+  },
+  {
+    name: "Product Management",
+    icon: <Target className="h-5 w-5" />,
+    description: "Prompts for product management and development",
+    prompts: [
+      {
+        title: "Product Roadmap",
+        text: "Develop a product roadmap for a new software product. Include feature prioritization, timeline, and resource allocation.",
+        tags: ["product", "roadmap", "planning", "features", "timeline"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "User Research",
+        text: "Design a user research plan for a mobile application. Include research methods, participant selection, and analysis framework.",
+        tags: ["product", "research", "user", "analysis", "methods"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Product Metrics",
+        text: "Define key product metrics for a subscription-based service. Include acquisition, engagement, and retention metrics.",
+        tags: ["product", "metrics", "analytics", "subscription", "engagement"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Feature Prioritization",
+        text: "Create a framework for prioritizing product features. Include scoring criteria, stakeholder input, and resource constraints.",
+        tags: ["product", "prioritization", "features", "framework", "planning"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Product Launch",
+        text: "Develop a product launch strategy for a new feature. Include marketing, communication, and adoption tactics.",
+        tags: ["product", "launch", "strategy", "marketing", "adoption"],
+        difficulty: "intermediate"
+      }
+    ]
+  }
+];
+
+export const CREATIVE_WRITING_CATEGORIES = [
+  {
+    name: "Fiction Writing",
+    icon: <PenSquare className="h-5 w-5" />,
+    description: "Prompts for fiction writing and storytelling",
+    prompts: [
+      {
+        title: "Character Development",
+        text: "Create a detailed character profile for a protagonist in a science fiction story. Include background, motivations, and character arc.",
+        tags: ["writing", "fiction", "character", "development", "storytelling"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "World Building",
+        text: "Design a unique fantasy world with its own magic system, culture, and history. Include geography, society, and conflicts.",
+        tags: ["writing", "fiction", "worldbuilding", "fantasy", "setting"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Plot Structure",
+        text: "Outline a three-act structure for a mystery novel. Include key plot points, character arcs, and resolution.",
+        tags: ["writing", "fiction", "plot", "structure", "mystery"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Dialogue Writing",
+        text: "Create a dialogue scene between two characters with opposing goals. Include subtext, conflict, and character voice.",
+        tags: ["writing", "fiction", "dialogue", "character", "conflict"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Genre Blending",
+        text: "Develop a story concept that blends two different genres. Include world elements, character types, and plot structure.",
+        tags: ["writing", "fiction", "genre", "blending", "concept"],
+        difficulty: "advanced"
+      }
+    ]
+  },
+  {
+    name: "Creative Nonfiction",
+    icon: <Book className="h-5 w-5" />,
+    description: "Prompts for creative nonfiction and personal writing",
+    prompts: [
+      {
+        title: "Memoir Writing",
+        text: "Outline a memoir chapter about a significant life event. Include sensory details, emotional truth, and personal reflection.",
+        tags: ["writing", "nonfiction", "memoir", "personal", "reflection"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Travel Writing",
+        text: "Create a travel narrative about a transformative journey. Include setting, cultural insights, and personal growth.",
+        tags: ["writing", "nonfiction", "travel", "narrative", "culture"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Personal Essay",
+        text: "Develop a personal essay about a meaningful experience. Include theme, structure, and universal resonance.",
+        tags: ["writing", "nonfiction", "essay", "personal", "theme"],
+        difficulty: "intermediate"
+      },
+      {
+        title: "Literary Journalism",
+        text: "Write a piece of literary journalism about a current event. Include research, narrative elements, and analysis.",
+        tags: ["writing", "nonfiction", "journalism", "research", "narrative"],
+        difficulty: "advanced"
+      },
+      {
+        title: "Profile Writing",
+        text: "Create a character profile of an interesting person. Include background, personality traits, and significant moments.",
+        tags: ["writing", "nonfiction", "profile", "character", "biography"],
+        difficulty: "intermediate"
       }
     ]
   }
