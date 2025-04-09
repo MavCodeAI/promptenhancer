@@ -56,8 +56,41 @@ const PromptImprover = () => {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
       
-      // Directly enhance the prompt without additional text
-      const enhanced = `${inputPrompt}`;
+      // Enhance the prompt based on settings
+      let enhanced = inputPrompt;
+
+      // Add context based on prompt length
+      switch (promptLength) {
+        case "short":
+          enhanced = `Create a concise and focused response to: ${inputPrompt}`;
+          break;
+        case "medium":
+          enhanced = `Provide a detailed response with examples to: ${inputPrompt}`;
+          break;
+        case "long":
+          enhanced = `Create a comprehensive response with detailed explanations, examples, and step-by-step guidance for: ${inputPrompt}`;
+          break;
+      }
+
+      // Add creativity level
+      if (creativity > 0.7) {
+        enhanced += "\n\nBe creative and innovative in your approach.";
+      } else if (creativity < 0.3) {
+        enhanced += "\n\nFocus on practical and straightforward solutions.";
+      }
+
+      // Add example usage if enabled
+      if (useExamples) {
+        enhanced += "\n\nInclude relevant examples where appropriate.";
+      }
+
+      // Add category-specific enhancements if a category is selected
+      if (selectedCategory) {
+        const category = allCategories.find(cat => cat.name === selectedCategory);
+        if (category) {
+          enhanced += `\n\nConsider the context of ${category.name.toLowerCase()}: ${category.description}`;
+        }
+      }
       
       setEnhancedPrompt(enhanced);
     } catch (error) {
